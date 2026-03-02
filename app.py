@@ -5,7 +5,7 @@ import numpy as np
 
 st.set_page_config(
     page_title="CLEW Nexus: What Breaks First?",
-    page_icon="⚠️",
+    page_icon="🌍",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
