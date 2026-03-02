@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import numpy as np
 
 st.set_page_config(
-    page_title="WEF Nexus: What Breaks First?",
+    page_title="CLEW Nexus: What Breaks First?",
     page_icon="⚠️",
     layout="wide",
     initial_sidebar_state="collapsed"
