@@ -72,11 +72,15 @@ with col_sliders:
     with col_water:
         water_availability = st.number_input(
             "Water Availability (B m³/year)",
-            min_value=10, max_value=100, value=10, step=10
+            min_value=5, max_value=50, value=5, step=5
         )
 
 with col_results:
     st.subheader("Constraints & Outputs")
+    
+    # Define baseline diet intensity for proportional scaling
+    baseline_diet_intensity = 200  # kg/person/year
+    diet_proportionality_factor = diet_intensity / baseline_diet_intensity
     
     # Calculate food demand
     food_demand = population * diet_intensity / 1000
@@ -113,8 +117,9 @@ with col_results:
     # Water constraint (fossil fuels need cooling water)
     # Coal/gas plants: ~2-5 m³ per MWh
     water_for_fossil = fossil_energy * 3  # m³ (in billion equivalent)
-    water_for_food = (food_demand * (irrigation_share / 100)) * 2.0  # Irrigated: 2.0 B m³/M tons
-    water_for_food += (food_demand * ((100 - irrigation_share) / 100)) * 0.3  # Rainfed: 0.3 B m³/M tons
+    # Irrigated water scales proportionally with diet intensity
+    water_for_food = (food_demand * (irrigation_share / 100)) * 2.0 * diet_proportionality_factor  # Irrigated: 2.0 B m³/M tons
+    water_for_food += (food_demand * ((100 - irrigation_share) / 100)) * 0.3 * diet_proportionality_factor  # Rainfed: 0.3 B m³/M tons
     water_for_biofuel = biofuel_energy * 1.5  # Biofuel crops need irrigation
     
     # Emissions - absolute emissions (total, not per capita)
