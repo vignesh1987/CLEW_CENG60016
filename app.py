@@ -10,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-st.markdown("#  Nexus: What Breaks First?")
+st.markdown("# CLEW Nexus: What Breaks First?")
 
 col_sliders, col_results = st.columns([1.2, 1.8])
 
